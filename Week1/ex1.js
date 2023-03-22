@@ -12,16 +12,34 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) throw err;
     console.log('Connected to MySQL server');})
-    
+
+        // Drop the database if it exists
+        connection.query('DROP DATABASE IF EXISTS meetup', (err, result) => {
+            if (err) throw err;
+            console.log('Database dropped');
+          });
+    // Create the database
+    connection.query('CREATE DATABASE meetup', (err, result) => {
+        if (err) throw err;
+        console.log('Database created');
+      });
+  
+      // Use the meetup database
+      connection.query('USE meetup', (err, result) => {
+        if (err) throw err;
+        console.log('Database selected');
+      });
+  
     // Create the Invitee table
     const createInviteeTable = `CREATE TABLE Invitee (
       invitee_no INT PRIMARY KEY,
-      invitee_name VARCHAR(50),
-      invited_by VARCHAR(50)
+      invitee_name VARCHAR(255),
+      invited_by VARCHAR(255)
     )`;
     connection.query(createInviteeTable, (err, result) => {
       if (err) throw err;
       console.log('Invitee table created');})
+
       
       // Insert data into the Invitee table
       const insertInviteeData = `INSERT INTO Invitee (invitee_no, invitee_name, invited_by)
@@ -38,7 +56,7 @@ connection.connect((err) => {
         // Create the Room table
         const createRoomTable = `CREATE TABLE Room (
           room_no INT PRIMARY KEY,
-          room_name VARCHAR(50),
+          room_name VARCHAR(255),
           floor_number INT
         )`;
         connection.query(createRoomTable, (err, result) => {
@@ -83,6 +101,7 @@ connection.connect((err) => {
                 if (err) throw err;
                 console.log('Meeting data inserted');})
 
+    
   connection.end((error) => {
     if (error) throw error;
     console.log('Connection closed.');
