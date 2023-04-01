@@ -9,10 +9,7 @@ const connection = mysql.createConnection({
 
 // Connect to the MySQL server
 connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL server:', err);
-    return;
-  }
+  if (err) throw err;
   console.log('Connected to MySQL server');
 });
 
@@ -37,10 +34,7 @@ const firstJoin = `SELECT a.author_name, m.mentor_name
     console.log('secondJoin results:', results);
   });
 
-connection.end((err) => {
-  if (err) {
-    console.error('Error closing MySQL connection:', err);
-    return;
-  }
-  console.log('Connection closed');
-});
+  connection.end((err) => {
+    if (err) throw err;
+    console.log('Connection closed');
+  });
