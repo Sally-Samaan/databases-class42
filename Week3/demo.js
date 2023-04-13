@@ -4,8 +4,8 @@ async function main(){
 
 ////connect to mongodb
 
-    const uri = "mongodb+srv://sallySamaan:***********@clustersally.n10bcxh.mongodb.net/?retryWrites=true&w=majority";
-
+    const uri = "mongodb+srv://sallySamaan:Ph*********@clustersally.n10bcxh.mongodb.net/?retryWrites=true&w=majority";
+    /// mongosh "mongodb+srv://clustersally.n10bcxh.mongodb.net/myFirstDatabase" --apiVersion 1 --username sallySamaan
     const client = new MongoClient(uri);
     try{
         await client.connect();
